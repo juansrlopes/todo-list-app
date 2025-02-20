@@ -1,15 +1,16 @@
-// src/components/Tasks/utils.ts
-
 export interface Task {
     id: number;
     text: string;
     completed: boolean;
   }
   
+  // Base API URL
+  const API_URL = import.meta.env.VITE_API_URL;
+  
   // Fetch all tasks
   export const fetchTasks = async (): Promise<Task[]> => {
     try {
-      const response = await fetch('/api/tasks');
+      const response = await fetch(`${API_URL}/tasks`);
       const data = await response.json();
       return data;
     } catch (error) {
@@ -21,7 +22,7 @@ export interface Task {
   // Add a new task
   export const addTask = async (task: Task): Promise<Task | undefined> => {
     try {
-      const response = await fetch('/api/tasks', {
+      const response = await fetch(`${API_URL}/tasks`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,7 +39,7 @@ export interface Task {
   // Toggle task completion status
   export const toggleTaskCompletion = async (id: number, completed: boolean): Promise<Task | undefined> => {
     try {
-      const response = await fetch(`/api/tasks/${id}`, {
+      const response = await fetch(`${API_URL}/tasks/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -55,7 +56,7 @@ export interface Task {
   // Delete a task
   export const deleteTask = async (id: number): Promise<void> => {
     try {
-      await fetch(`/api/tasks/${id}`, {
+      await fetch(`${API_URL}/tasks/${id}`, {
         method: 'DELETE',
       });
     } catch (error) {
@@ -66,7 +67,7 @@ export interface Task {
   // Update a task
   export const updateTask = async (id: number, updatedTask: Task): Promise<Task | undefined> => {
     try {
-      const response = await fetch(`/api/tasks/${id}`, {
+      const response = await fetch(`${API_URL}/tasks/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
