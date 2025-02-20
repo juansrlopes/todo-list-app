@@ -51,4 +51,19 @@ export default [
       ...js.configs.recommended.rules,
     },
   },
+  {
+    // Configuration for Node.js config files
+    files: ['postcss.config.js'], // Add any other config files here
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.node, // Use Node.js globals
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'script', // CommonJS typically uses script type
+      },
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+    },
+  },
 ];
